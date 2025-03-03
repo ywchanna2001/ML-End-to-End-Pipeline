@@ -1,0 +1,26 @@
+[2025-03-03T11:11:29.605+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: stock_price_prediction.run_stock_prediction manual__2025-03-03T11:11:26.119562+00:00 [queued]>
+[2025-03-03T11:11:29.614+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: stock_price_prediction.run_stock_prediction manual__2025-03-03T11:11:26.119562+00:00 [queued]>
+[2025-03-03T11:11:29.614+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2025-03-03T11:11:29.629+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): run_stock_prediction> on 2025-03-03 11:11:26.119562+00:00
+[2025-03-03T11:11:29.636+0000] {standard_task_runner.py:60} INFO - Started process 80 to run task
+[2025-03-03T11:11:29.639+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'stock_price_prediction', 'run_stock_prediction', 'manual__2025-03-03T11:11:26.119562+00:00', '--job-id', '32', '--raw', '--subdir', 'DAGS_FOLDER/stock_price_prediction.py', '--cfg-path', '/tmp/tmp1lw6t3ll']
+[2025-03-03T11:11:29.641+0000] {standard_task_runner.py:88} INFO - Job 32: Subtask run_stock_prediction
+[2025-03-03T11:11:29.683+0000] {task_command.py:423} INFO - Running <TaskInstance: stock_price_prediction.run_stock_prediction manual__2025-03-03T11:11:26.119562+00:00 [running]> on host d690bf3e6c53
+[2025-03-03T11:11:29.758+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='stock_price_prediction' AIRFLOW_CTX_TASK_ID='run_stock_prediction' AIRFLOW_CTX_EXECUTION_DATE='2025-03-03T11:11:26.119562+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-03-03T11:11:26.119562+00:00'
+[2025-03-03T11:11:29.796+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/stock_price_prediction.py", line 25, in run_ml_script
+    subprocess.run(["python3", "/path/to/ml_pipeline.py"], check=True)
+  File "/usr/local/lib/python3.8/subprocess.py", line 516, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '/path/to/ml_pipeline.py']' returned non-zero exit status 2.
+[2025-03-03T11:11:29.813+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=stock_price_prediction, task_id=run_stock_prediction, execution_date=20250303T111126, start_date=20250303T111129, end_date=20250303T111129
+[2025-03-03T11:11:29.838+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 32 for task run_stock_prediction (Command '['python3', '/path/to/ml_pipeline.py']' returned non-zero exit status 2.; 80)
+[2025-03-03T11:11:29.852+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-03-03T11:11:29.872+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
